@@ -1,2 +1,3 @@
 # IOT
-Generic repo for IOT students (EPFL)
+Generic Repo for IOT students (EPFL)
+Create your folder in each directory and keep in syn: let's share  !
