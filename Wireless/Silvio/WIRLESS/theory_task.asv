@@ -1,0 +1,11 @@
+sym1=[3 +3i,3 -3i,+3 -3i,-3 -3i];
+sym2=[3,-3,3i,-3i,6+6i,6-6i];
+
+Emean1=(sym1*sym1')./size(sym1,2);
+Emean2=(sym2*sym2')./size(sym2,2);
+
+newSym1=sym1./sqrt(Emean1);
+newSym2=sym2./sqrt(Emean2);
+
+Emean1=(newSym1*sym1')./size(sym1,2)
+Emean2=(sym2*sym2')./size(sym2,2)
