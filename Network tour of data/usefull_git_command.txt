@@ -1,0 +1,18 @@
+-------------------WORK FLOW-------------------
+git clone "link"
+git pull
+git branch "name"
+git checkout "name of branch to enter"
+git add "name of file to add"
+git push
+git commit -m "name"
+
+-------------------GENERAL-------------------
+git status
+git log
+git diff
+
+
+
+
+

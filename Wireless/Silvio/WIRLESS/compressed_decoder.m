@@ -17,16 +17,16 @@ image = reshape(image, image_size(2), image_size(1)).';
 height  = ceil(image_size(1)/8)*8;
 width   = ceil(image_size(2)/8)*8;
 padded = zeros(height,width);
-padded(1:image_size(2),1:image_size(1)) = image;
+padded(1:image_size(1),1:image_size(2)) = image;
 
-factor = 0.7;
+factor =0.7;
 
 % segment image into tiles
 data = zeros(8*8,(width*height)/(8*8));
 k = 1;
 
-for rr=1:8:width % go through rows 
-    for cc=1:8:height % go through columns
+for cc=1:8:width % go through rows 
+    for rr=1:8:height % go through columns
         patch       = padded(rr:rr+7,cc:cc+7);
         vector      = reshape(patch,8*8,1);
         data(:,k)   = vector;
@@ -35,7 +35,7 @@ for rr=1:8:width % go through rows
 end
 
 % decompose 
-[U S V]         = svd(data.',0);
+[U,S,V]         = svd(data.',0);
 
 % filter weak singular values 
 fullsv              = diag(S);
@@ -46,18 +46,18 @@ compressedsv(mask)  = fullsv(mask);
 SC = diag(compressedsv);
 
 % compose
-newdata = U*SC*V';
+newdata = (U*SC*V');
 newpadded = zeros(height,width);
 k = 1;
 
 % assemble full image from patches
-for rr=1:8:width % go through rows
-    for cc=1:8:height % go through columns
+for cc=1:8:width % go through rows
+    for rr=1:8:height % go through columns
         patch = newdata(k,:);
-        newpadded(rr:rr+7,cc:cc+7) = reshape(patch,8,8).';
+        newpadded(rr:rr+7,cc:cc+7) = reshape(patch,8,8);
+        k=k+1;
     end
 end
-
 % shrink to original size
 newimage = newpadded(1:image_size(1),1:image_size(2));
 
