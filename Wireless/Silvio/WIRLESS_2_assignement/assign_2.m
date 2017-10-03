@@ -1,4 +1,3 @@
-clear
 sign=load('task2.mat');
 SNRdb=10;
 sigH=sqrt((10^(-SNRdb/10))/2);
