@@ -4,7 +4,8 @@ clear
 sign=load('task2.mat');
 %analizing with a more extend possible gammas, it's clear that the
 %choice will fall in the low part of the gammas
-possibleGamma=linspace(14, 24, 1000);
+%first analysis point a gamma between 15 and 22
+possibleGamma=linspace(10, 30, 20000);
 gammaHit=zeros(length(possibleGamma),1);
 
 SNRdB=linspace(-5,10,40)';
@@ -12,15 +13,16 @@ sigH=sqrt((10.^(-SNRdB/10))./2);
 noise=sigH*randn(1,length(sign.signal))+1i*(sigH*randn(1,length(sign.signal)));
 received=repmat(sign.signal.',length(sigH),1)+noise;
 pattern=(LFSR);
-convVect=zeros(1,length(pattern));
-convVal=zeros(length(sign.signal),1);
-for j=1:length(SNRdB);
-    j
+convVect=zeros(length(SNRdB),length(pattern));
+convVal=zeros(1,length(SNRdB));
     for i=1:(length(sign.signal)-length(pattern))
-        convVect(1,:)=received(j,i:i+length(pattern)-1);
-        convVal=(abs(pattern'*convVect.')^2)/abs(convVect*convVect');
-        gammaHit(possibleGamma<convVal)=gammaHit(possibleGamma<convVal)+1;
+        if(mod(i,1000)==0)
+            i
+        end
+        %TODO-->lot of things
+        convVect(:,:)=received(:,i:i+length(pattern)-1);
+        convVal=(abs(convVect*pattern).^2)./diag(abs(convVect*convVect'));
+        gammaHit(possibleGamma<convVal(:,1))=gammaHit(possibleGamma<convVal(:,1))+1;
     end
-end
 
 plot(possibleGamma,(gammaHit./(length(SNRdB))))

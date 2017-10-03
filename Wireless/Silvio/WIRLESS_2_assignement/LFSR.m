@@ -8,6 +8,5 @@ function pre= LFSR()
         temp(i+chainLen,1)=mod((temp(i:i+chainLen-1,1).')*pattern,2);      
     end
     pre=2.*temp(1:Np-chainLen,1)-1;
-    sum(pre)
     pre=(2.*temp(1:Np-chainLen,1)-1)+0i;
 end
