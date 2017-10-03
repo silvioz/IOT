@@ -1,5 +1,6 @@
 clear
 sign=load('task2.mat');
+possibleGamma=linspace(18,
 SNRdb=10;
 sigH=sqrt((10^(-SNRdb/10))/2);
 noise=randn(1,length(sign.signal))*sigH+1i*randn(1,length(sign.signal))*sigH;
