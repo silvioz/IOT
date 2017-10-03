@@ -1,5 +1,5 @@
 clear
-SNRdb=-5;
+SNRdb=-10;
 pattern=LFSR;
 pattern2=zeros(length(pattern)*20,1);
 pattern2(length(pattern)*14:length(pattern)*15-1,1)=pattern;
