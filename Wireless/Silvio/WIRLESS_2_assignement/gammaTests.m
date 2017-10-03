@@ -2,9 +2,9 @@
 
 clear
 sign=load('task2.mat');
-%analizing with a more extend possible gammas (10:100), it's clear that the
-%choice will fall in the low gamma
-possibleGamma=linspace(14, 25, 1000);
+%analizing with a more extend possible gammas, it's clear that the
+%choice will fall in the low part of the gammas
+possibleGamma=linspace(14, 24, 1000);
 gammaHit=zeros(length(possibleGamma),1);
 
 SNRdB=linspace(-5,10,40)';
