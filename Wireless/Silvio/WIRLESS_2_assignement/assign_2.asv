@@ -1,0 +1,27 @@
+function [syncOut]=sycronizer(sign)
+profile on
+gamma=10;
+%gamma found with experiment: 17 or near (other matlab test code)
+%sign=load('task2.mat');
+SNRdb=-5;
+sigH=sqrt((10^(-SNRdb/10))/2);
+noise=randn(1,length(sign.signal))*sigH+1i*randn(1,length(sign.signal))*sigH;
+%received=sign.signal+noise.';
+received=sign.signal;
+pattern=(LFSR);
+convVal=null(length(sign.signal),1);
+sync=null(length(sign.signal),1);
+%correlator
+for i=1:(length(sign.signal)-length(pattern))
+    convVal(i)=(abs(pattern'*received(i:i+length(pattern)-1,1))^2)/abs(received(i:i+length(pattern)-1,1)'*received(i:i+length(pattern)-1,1));
+    if convVal(i)>= gamma
+        sync(i)=gamma;
+    end
+end
+
+sync(sync==0)=NaN;
+plot(convVal)
+hold on
+plot(sync,'ro');
+profile off
+profile viewer
