@@ -1,8 +1,13 @@
 clear
 profile on
-gamma=linspace(14.5,17,2000);
+%Is possible to observe that optimal gamma lay somwhere around 16, using:
+%------gamma=linspace(14.5,17,2000);
+%------SNRdB=linspace(-5,10,40);
+%and in an exec time of 415 seconds is possible to observe that is 
+%around 17
+gamma=linspace(15,20,10000);
 signal=load('task2.mat');
-SNRdB=linspace(-5,10,30);
+SNRdB=linspace(-5,10,100);
 sigH=sqrt((10.^(-SNRdB/10))./2);
 noise=sigH.'*randn(1,length(signal.signal))+1i*sigH.'*randn(1,length(signal.signal));  
 received=repmat(signal.signal.',length(SNRdB),1)+noise;
@@ -11,6 +16,9 @@ convVal=zeros(length(SNRdB),length(signal.signal));
 
 %correlator
 for i=1:(length(signal.signal)-length(pattern))
+    if(mod(i,10000)==0)
+        i
+    end
     convVal(:,i)=(abs(received(:,i:i+length(pattern)-1)*pattern).^2)./diag(abs(received(:,i:i+length(pattern)-1)*received(:,i:i+length(pattern)-1)'));
 end
 
