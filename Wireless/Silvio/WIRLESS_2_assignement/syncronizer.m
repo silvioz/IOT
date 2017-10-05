@@ -1,12 +1,12 @@
-function [syncOut]=sycronizer(signal,gamma,SNRdB,addNoise)
-profile on
-%gamma=17;
+function [syncOut]=syncronizer(signal,SNRdB,addNoise,gamma)
+%profile on
+%gamma=9;
 %gamma found with experiment: 17 or near (other matlab test code)
 %signal=load('task2.mat');
 %SNRdb=-5;
 %addNoise='n';
 if addNoise=='y'
-    sigH=sqrt((10^(-SNRdb/10))/2);
+    sigH=sqrt((10^(-SNRdB/10))/2);
     noise=randn(1,length(signal.signal))*sigH+1i*randn(1,length(signal.signal))*sigH;  
     received=sign.signal+noise.';
 else
@@ -21,10 +21,10 @@ for i=1:(length(signal.signal)-length(pattern))
 end
 
 sync=round((sign(convVal-gamma)+1)./2);
-syncOut=find(sync==1);
+syncOut=find(sync==1)+length(pattern);
 sync(sync==0)=NaN;
 plot(convVal)
 hold on
 plot(sync.*gamma,'ro');
-profile off
-profile viewer
+%profile off
+%profile viewer

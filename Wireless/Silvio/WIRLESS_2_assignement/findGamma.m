@@ -5,9 +5,9 @@ profile on
 %------SNRdB=linspace(-5,10,40);
 %and in an exec time of 415 seconds is possible to observe that is 
 %around 17
-gamma=linspace(15,20,10000);
+gamma=linspace(14.5,17,2000);
 signal=load('task2.mat');
-SNRdB=linspace(-5,10,100);
+SNRdB=linspace(-5,10,40);
 sigH=sqrt((10.^(-SNRdB/10))./2);
 noise=sigH.'*randn(1,length(signal.signal))+1i*sigH.'*randn(1,length(signal.signal));  
 received=repmat(signal.signal.',length(SNRdB),1)+noise;
