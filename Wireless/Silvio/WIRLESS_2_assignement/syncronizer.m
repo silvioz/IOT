@@ -8,7 +8,7 @@ function [syncOut]=syncronizer(signal,SNRdB,addNoise,gamma)
 if addNoise=='y'
     sigH=sqrt((10^(-SNRdB/10))/2);
     noise=randn(1,length(signal.signal))*sigH+1i*randn(1,length(signal.signal))*sigH;  
-    received=sign.signal+noise.';
+    received=signal.signal+noise.';
 else
     received=signal.signal;
 end
