@@ -1,4 +1,7 @@
 clear
+%this is the entry point script
+%in "prova" there's a test of the correlator with the pure LFSR sequence
+%findGamma is a Script that help to find the optimal value of gamma
 profile off
 profile on
 signal=load('task2.mat');
