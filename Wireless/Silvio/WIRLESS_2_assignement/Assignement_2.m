@@ -16,3 +16,4 @@ image_decoder(b,imgSyze);
 
 profile off
 profile viewer
+profsave
