@@ -4,7 +4,7 @@ clc
 tic 
 %796.701554 seconds with n=500000; taps_r=1:200;
 n=500000;
-SNRdB=10;
+SNRdB=8;
 L=4;
 taps_t=41;
 alfa=0.22;
